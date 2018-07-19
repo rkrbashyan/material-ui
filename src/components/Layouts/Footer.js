@@ -8,18 +8,26 @@ const styles = {
 };
 
 export default withStyles(styles)(
-  (props) => 
-  <Paper className={props.classes.root}>
-    <Tabs
-      value={0}
-      // onChange={}
-      indicatorColor="primary"
-      textColor="primary"
-      centered
-    >
-      <Tab label="Item One" />
-      <Tab label="Item Two" />
-      <Tab label="Item Three" />
-    </Tabs>
-  </Paper>
+  ({classes, muscles, category, onSelect}) => {
+    const idx = category 
+      ? muscles.findIndex(group => group === category) + 1
+      : 0
+
+    return <Paper className={classes.root}>
+              <Tabs
+                value={idx}
+                onChange={(e, index) => {
+                  onSelect(index === 0 ? null : muscles[index - 1])
+                }}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+              >
+              <Tab label="All" />
+              { 
+                muscles.map((muscle, index) => <Tab key={index} label={muscle} />)
+              }
+              </Tabs>
+            </Paper>
+  }
 )

@@ -1,5 +1,6 @@
 import React from 'react'
 import { withStyles, AppBar, Toolbar, Typography } from '@material-ui/core';
+import CreateDialog from '../Exercises/Dialogs/Create'
 
 const styles = {
   root: {
@@ -15,12 +16,13 @@ const styles = {
 };
 
 export default withStyles(styles)(
-  (props) => 
+  ({classes, muscles, onCreate}) => 
   <AppBar position="static">
     <Toolbar>
-      <Typography variant="display2" color="inherit" className={props.classes.flex}>
+      <Typography variant="display2" color="inherit" className={classes.flex}>
         Exercises
       </Typography>
+      <CreateDialog categories={muscles} onCreate={onCreate}/>
     </Toolbar>
   </AppBar>
 )
